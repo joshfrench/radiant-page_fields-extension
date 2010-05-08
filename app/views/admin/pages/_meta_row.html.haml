@@ -1,9 +1,9 @@
 %tr
   %th.label
-    %label{:for=>"page_#{meta_row[:field]}"}= meta_row.field
+    %label{:for=>"page_#{meta_row.name}"}= meta_row.name
   %td.field
     = hidden_field_tag "page[metas_attributes][#{meta_row_counter}][id]", meta_row.id, :id => "page_metas_attributes_#{meta_row_counter}_id"
-    = hidden_field_tag "page[metas_attributes][#{meta_row_counter}][field]", meta_row.field, :id => "page_metas_attributes_#{meta_row_counter}_field"
+    = hidden_field_tag "page[metas_attributes][#{meta_row_counter}][name]", meta_row.name, :id => "page_metas_attributes_#{meta_row_counter}_name"
     = text_field_tag "page[metas_attributes][#{meta_row_counter}][content]", meta_row.content, :id => "page_metas_attributes_#{meta_row_counter}_content", :class => "textbox", :maxlength => 200
   %td.actions
     - if meta_row_counter+1 == @page.metas.size

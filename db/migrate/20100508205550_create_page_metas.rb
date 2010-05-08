@@ -2,7 +2,7 @@ class CreatePageMetas < ActiveRecord::Migration
   def self.up
     create_table :page_metas do |t|
       t.integer :page_id
-      t.string :field
+      t.string :name
       t.string :content
     end
     add_index :page_metas, :page_id

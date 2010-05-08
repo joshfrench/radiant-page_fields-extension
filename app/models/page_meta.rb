@@ -1,3 +1,3 @@
 class PageMeta < ActiveRecord::Base
-  validates_presence_of :field
+  validates_presence_of :name
 end
