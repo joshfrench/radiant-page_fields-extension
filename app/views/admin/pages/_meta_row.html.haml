@@ -4,7 +4,10 @@
   %td.field
     = hidden_field_tag "page[metas_attributes][#{meta_row_counter}][id]", meta_row.id, :id => "page_metas_attributes_#{meta_row_counter}_id"
     = hidden_field_tag "page[metas_attributes][#{meta_row_counter}][name]", meta_row.name, :id => "page_metas_attributes_#{meta_row_counter}_name"
+    = hidden_field_tag "page[metas_attributes][#{meta_row_counter}][_delete]", false, :class => 'delete_input'
     = text_field_tag "page[metas_attributes][#{meta_row_counter}][content]", meta_row.content, :id => "page_metas_attributes_#{meta_row_counter}_content", :class => "textbox", :maxlength => 200
   %td.actions
-    - if meta_row_counter+1 == @page.metas.size
-      %img{:src=>"/images/admin/plus_grey.png", :alt=>"Add Attribute", :title=>""}/
+    - if @page.nil? || meta_row_counter+1 == @page.metas.size
+      - link_to '#add_attribute_popup', :class=>'popup', :alt => "Add Attribute" do
+        = image 'plus_grey'
+    = link_to_function image('minus_grey', :alt => 'Remove Attribute'), "event.stop(); window.removeAttribute(this)", :title => "Remove attribute"

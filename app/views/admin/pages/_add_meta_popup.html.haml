@@ -1,0 +1,14 @@
+- include_javascript 'admin/pagemeta'
+#add_attribute_popup.popup{:style=>"display: none"}
+  #add_attribute_busy.busy{:style=>"display: none"}= image('spinner.gif')
+  %h3.title Add Attribute
+  - form_for [:admin, PageMeta.new], :html => { :onsubmit => "event.stop(); addAttribute(this)" } do |f|
+    %p
+      %label{:for=>"page_meta_name"} Name
+      = f.text_field :name, :maxlength=>100, :class=>'textbox big', :style=>"width: 15em"
+      = hidden_field_tag 'index', 2, :id=>'page_meta_index_field'
+      = hidden_field_tag 'meta_row_counter', @page.metas.size
+    %p.buttons
+      = submit_tag 'Add Attribute', :class=>'button', :id=>'add_page_meta_button'
+      = t('or')
+      = link_to_function t('cancel'), "$(this).closePopup()"
