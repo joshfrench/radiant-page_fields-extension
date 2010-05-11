@@ -5,11 +5,10 @@ class PageMetaExtension < Radiant::Extension
   version "1.0"
   description "Describe your extension here"
   url "http://github.com/jfrench/radiant-page_meta-extension"
-
-  # See your config/routes.rb file in this extension to define custom routes
   
   def activate
     Page.send :include, PageExtensions
     admin.pages.edit.add :popups, 'add_meta_popup'
   end
+
 end
