@@ -1,5 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
   map.namespace :admin do |admin|
-    admin.resources :meta, :only => [:new, :create], :path_prefix => 'pages'
+    admin.page_metas 'pages/meta', :action => :create, :controller => 'page_metas', :conditions => { :method => :post }
   end
 end
