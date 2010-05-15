@@ -27,7 +27,8 @@ function attributeAdded(element) {
   $(element).previous('.busy').hide();
   $(element).down('.button').enable();
   $(element).up('.popup').closePopup();
-	$('meta_row_counter').setValue(Number($('meta_row_counter').value).succ);
+	$('page_meta_counter').setValue(Number($('page_meta_counter').value).succ);
+	$('new_page_meta').reset();
 }
 function attributeLoading(element) {
   $(element).down('.button').disable();

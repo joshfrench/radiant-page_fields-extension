@@ -1,0 +1,13 @@
+%tr
+  %th.label
+    %label{:for=>"page_#{page_meta.name}"}= page_meta.name
+  %td.field
+    = hidden_field_tag "page[metas_attributes][#{page_meta_counter}][id]", page_meta.id, :id => "page_metas_attributes_#{page_meta_counter}_id"
+    = hidden_field_tag "page[metas_attributes][#{page_meta_counter}][name]", page_meta.name, :id => "page_metas_attributes_#{page_meta_counter}_name"
+    = hidden_field_tag "page[metas_attributes][#{page_meta_counter}][_delete]", false, :class => 'delete_input'
+    = text_field_tag "page[metas_attributes][#{page_meta_counter}][content]", page_meta.content, :id => "page_metas_attributes_#{page_meta_counter}_content", :class => "textbox", :maxlength => 200
+  %td.actions
+    - if @page.nil? || page_meta_counter+1 == @page.metas.size
+      - link_to '#add_attribute_popup', :class=>'popup', :alt => "Add Attribute" do
+        = image 'plus_grey'
+    = link_to_function image('minus_grey', :alt => 'Remove Attribute'), "event.stop(); window.removeAttribute(this)", :title => "Remove attribute"

@@ -9,6 +9,7 @@ class PageMetaExtension < Radiant::Extension
   def activate
     Page.send :include, PageExtensions
     admin.pages.edit.add :popups, 'add_meta_popup'
+    admin.page.edit.add :extended_metadata, "page_metas"
   end
 
 end
