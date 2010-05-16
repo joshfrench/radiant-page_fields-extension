@@ -1,7 +1,7 @@
 function addAttribute(form) {
   if (validAttributeName()) {
     new Ajax.Updater(
-      $('attributes').down('table'),
+      $('attributes').down('tbody'),
       '/admin/pages/meta/',
       {
         asynchronous: true,
