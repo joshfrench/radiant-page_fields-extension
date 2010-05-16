@@ -16,7 +16,7 @@ describe Admin::PageMetasController do
 
   it "should render the meta_row partial" do
     xhr :post, :create
-    response.should render_template('admin/pages/_meta_row')
+    response.should render_template('admin/page_metas/_page_meta')
   end
 
 end

@@ -6,6 +6,7 @@ describe PageMeta do
   end
 
   it "should be valid" do
+    @page_meta.name = 'New Meta'
     @page_meta.should be_valid
   end
 end
