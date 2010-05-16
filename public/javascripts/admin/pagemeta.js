@@ -35,5 +35,18 @@ function attributeLoading(element) {
   $(element).previous('.busy').appear();
 }
 function validAttributeName() {
+  var metaNameField = $('page_meta_name');
+  var name = metaNameField.value.downcase();
+  if (name.blank()) {
+    alert('Attribute name cannot be empty.');
+    return false;
+  }
+  if (findMetaByName(name)) {
+    alert('Attribute name must be unique.');
+    return false;
+  }
   return true;
+}
+function findMetaByName(name) {
+  return $('attributes').select('input.page_meta_name').detect(function(input) { return input.value.downcase() == name });
 }
