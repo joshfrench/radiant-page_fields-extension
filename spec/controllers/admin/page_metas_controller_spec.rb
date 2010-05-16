@@ -14,7 +14,7 @@ describe Admin::PageMetasController do
     meta.name.should eql('Keywords')
   end
 
-  it "should render the meta_row partial" do
+  it "should render the page_meta partial" do
     xhr :post, :create
     response.should render_template('admin/page_metas/_page_meta')
   end
