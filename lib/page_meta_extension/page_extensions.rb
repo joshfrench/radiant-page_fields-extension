@@ -5,7 +5,7 @@ module PageMetaExtension::PageExtensions
       accepts_nested_attributes_for :metas, :allow_destroy => true
       class << self
         def new_with_defaults_with_meta(config = Radiant::Config)
-          page = new_with_defaults_without_meta
+          page = new_with_defaults_without_meta(config)
           page.metas.concat default_page_meta(config)
           page
         end

@@ -7,7 +7,7 @@ class PageMetaExtension < Radiant::Extension
   url "http://github.com/jfrench/radiant-page_meta-extension"
   
   def activate
-    Page.send :include, PageExtensions
+    Page.send :include, PageExtensions, MetaTags
     admin.pages.edit.add :popups, 'add_meta_popup'
     admin.page.edit.add :extended_metadata, "page_metas"
   end
