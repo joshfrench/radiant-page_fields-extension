@@ -18,6 +18,7 @@ module PageMetaExtension::MetaTags
     if tag.double?
       tag.expand
     else
+      ActiveSupport::Deprecation.warn("Using r:meta without a `name' attribute is deprecated. Please use r:meta name='Meta Attribute' instead.",caller)
       tag.render('description', tag.attr) +
       tag.render('keywords', tag.attr)
     end
@@ -32,8 +33,9 @@ module PageMetaExtension::MetaTags
     <pre><code> <r:meta:description [tag="false"] /> </code></pre>
   }
   tag 'meta:description' do |tag|
+    ActiveSupport::Deprecation.warn('r:meta:description is deprecated. Please use r:meta name="Description" instead.',caller)
     show_tag = tag.attr['tag'] != 'false' || false
-    description = CGI.escapeHTML(tag.locals.page.description)
+    description = CGI.escapeHTML(tag.locals.page.metas['Description'])
     if show_tag
       "<meta name=\"description\" content=\"#{description}\" />"
     else
@@ -50,8 +52,9 @@ module PageMetaExtension::MetaTags
     <pre><code> <r:meta:keywords [tag="false"] /> </code></pre>
   }
   tag 'meta:keywords' do |tag|
+    ActiveSupport::Deprecation.warn('r:meta:keywords is deprecated. Please use r:meta name="Keywords" instead.',caller)
     show_tag = tag.attr['tag'] != 'false' || false
-    keywords = CGI.escapeHTML(tag.locals.page.keywords)
+    keywords = CGI.escapeHTML(tag.locals.page.metas['Keywords'])
     if show_tag
       "<meta name=\"keywords\" content=\"#{keywords}\" />"
     else

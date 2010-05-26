@@ -7,4 +7,19 @@ describe Page do
     @page.metas.first.name.should == 'x'
     @page.metas.last.name.should == 'z'
   end
+
+  describe "#meta[]" do
+    before do
+      @page = Page.new
+      @page.metas << PageMeta.new(:name => 'Meta', :content => 'sweet harmonious biscuit')
+    end
+
+    it "should find meta by name" do
+      @page.metas['Meta'].should eql('sweet harmonious biscuit')
+    end
+
+    it "should return nil if meta not found" do
+      @page.metas['Bogus'].should be_nil
+    end
+  end
 end

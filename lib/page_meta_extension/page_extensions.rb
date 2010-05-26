@@ -1,7 +1,11 @@
 module PageMetaExtension::PageExtensions
   def self.included(base)
     base.instance_eval do
-      has_many :metas, :class_name => 'PageMeta', :order => :id, :dependent => :destroy
+      has_many :metas, :class_name => 'PageMeta', :order => :id, :dependent => :destroy do
+        def [](name)
+          detect { |m| m.name == name }.try :content
+        end
+      end
       accepts_nested_attributes_for :metas, :allow_destroy => true
       class << self
         def new_with_defaults_with_meta(config = Radiant::Config)
