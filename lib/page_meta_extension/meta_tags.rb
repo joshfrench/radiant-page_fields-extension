@@ -18,9 +18,20 @@ module PageMetaExtension::MetaTags
     if tag.double?
       tag.expand
     else
-      ActiveSupport::Deprecation.warn("Using r:meta without a `name' attribute is deprecated. Please use r:meta name='Meta Attribute' instead.",caller)
-      tag.render('description', tag.attr) +
-      tag.render('keywords', tag.attr)
+      if !tag.attr['name'].blank?
+        meta = tag.attr['name']
+        show_tag = tag.attr['tag'] != 'false' || false
+        description = CGI.escapeHTML(tag.locals.page.metas[meta])
+        if show_tag
+          %{<meta name="#{meta.downcase}" content="#{description}" />}
+        else
+          description
+        end
+      else
+        ActiveSupport::Deprecation.warn("Using r:meta without a `name' attribute is deprecated. Please use r:meta name='Meta Attribute' instead.",caller)
+        tag.render('description', tag.attr) +
+        tag.render('keywords', tag.attr)
+      end
     end
   end
 

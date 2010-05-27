@@ -20,6 +20,11 @@ describe PageMetaExtension::MetaTags do
       @page.should render('<r:meta/>').as(%{<meta name="description" content="sweet &amp; harmonious biscuits" /><meta name="keywords" content="sweet &amp; harmonious biscuits" />})
     end
 
+    it "should render <meta> tag for named attribute" do
+      @page.metas = [@keywords, @description]
+      @page.should render('<r:meta name="Description"/>').as(%{<meta name="description" content="The homepage" />})
+    end
+
     describe "with 'tag' attribute set to 'false'" do
       it "should render the contents of the description and keywords" do
         @page.metas = [@keywords, @description]
@@ -29,6 +34,11 @@ describe PageMetaExtension::MetaTags do
       it "should escape the contents of the description and keywords" do
         @page.metas = [@escaped_keywords, @escaped_description]
         @page.should render('<r:meta tag="false" />').as("sweet &amp; harmonious biscuitssweet &amp; harmonious biscuits")
+      end
+
+      it "should render <meta> tag for named attribute" do
+        @page.metas = [@keywords, @description]
+        @page.should render('<r:meta name="Description" tag="false"/>').as('The homepage')
       end
     end
   end
