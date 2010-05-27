@@ -18,6 +18,10 @@ describe Page do
       @page.metas['Meta'].should eql('sweet harmonious biscuit')
     end
 
+    it "should be case insensitive" do
+      @page.metas['meta'].should eql('sweet harmonious biscuit')
+    end
+
     it "should return nil if meta not found" do
       @page.metas['Bogus'].should be_nil
     end

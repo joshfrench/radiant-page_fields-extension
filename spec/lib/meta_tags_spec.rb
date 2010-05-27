@@ -22,7 +22,7 @@ describe PageMetaExtension::MetaTags do
 
     it "should render <meta> tag for named attribute" do
       @page.metas = [@keywords, @description]
-      @page.should render('<r:meta name="Description"/>').as(%{<meta name="description" content="The homepage" />})
+      @page.should render('<r:meta name="description"/>').as(%{<meta name="description" content="The homepage" />})
     end
 
     describe "with 'tag' attribute set to 'false'" do
@@ -38,7 +38,7 @@ describe PageMetaExtension::MetaTags do
 
       it "should render <meta> tag for named attribute" do
         @page.metas = [@keywords, @description]
-        @page.should render('<r:meta name="Description" tag="false"/>').as('The homepage')
+        @page.should render('<r:meta name="description" tag="false"/>').as('The homepage')
       end
     end
   end
