@@ -7,7 +7,7 @@
       %label{:for=>"page_meta_name"}= t('name')
       = f.text_field :name, :maxlength=>100, :class=>'textbox big', :style=>"width: 15em"
       = hidden_field_tag 'index', 2, :id=>'page_meta_index_field'
-      = hidden_field_tag 'page_meta_counter', @page.metas.size
+      = hidden_field_tag 'page_meta_counter', @page.meta.size
     %p.buttons
       = submit_tag t('add_attribute'), :class=>'button', :id=>'add_page_meta_button'
       = t('or')

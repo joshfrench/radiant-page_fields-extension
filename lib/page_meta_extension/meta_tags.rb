@@ -21,7 +21,7 @@ module PageMetaExtension::MetaTags
       if !tag.attr['name'].blank?
         meta = tag.attr['name']
         show_tag = tag.attr['tag'] != 'false' || false
-        description = CGI.escapeHTML(tag.locals.page.metas[meta])
+        description = CGI.escapeHTML(tag.locals.page.meta[meta])
         if show_tag
           %{<meta name="#{meta.downcase}" content="#{description}" />}
         else
@@ -46,7 +46,7 @@ module PageMetaExtension::MetaTags
   tag 'meta:description' do |tag|
     ActiveSupport::Deprecation.warn('r:meta:description is deprecated. Please use r:meta name="Description" instead.',caller)
     show_tag = tag.attr['tag'] != 'false' || false
-    description = CGI.escapeHTML(tag.locals.page.metas['Description'])
+    description = CGI.escapeHTML(tag.locals.page.meta['Description'])
     if show_tag
       "<meta name=\"description\" content=\"#{description}\" />"
     else
@@ -65,7 +65,7 @@ module PageMetaExtension::MetaTags
   tag 'meta:keywords' do |tag|
     ActiveSupport::Deprecation.warn('r:meta:keywords is deprecated. Please use r:meta name="Keywords" instead.',caller)
     show_tag = tag.attr['tag'] != 'false' || false
-    keywords = CGI.escapeHTML(tag.locals.page.metas['Keywords'])
+    keywords = CGI.escapeHTML(tag.locals.page.meta['Keywords'])
     if show_tag
       "<meta name=\"keywords\" content=\"#{keywords}\" />"
     else

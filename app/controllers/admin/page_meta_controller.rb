@@ -1,4 +1,4 @@
-class Admin::PageMetasController < Admin::ResourceController
+class Admin::PageMetaController < Admin::ResourceController
   def create
     self.model.attributes = params[model_symbol]
     @controller_name = 'page'

@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../../spec_helper'
 
-describe Admin::PageMetasController do
+describe Admin::PageMetaController do
   dataset :users
 
   before do
@@ -16,7 +16,7 @@ describe Admin::PageMetasController do
 
   it "should render the page_meta partial" do
     xhr :post, :create
-    response.should render_template('admin/page_metas/_page_meta')
+    response.should render_template('admin/page_meta/_page_meta')
   end
 
 end
