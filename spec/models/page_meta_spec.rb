@@ -39,4 +39,12 @@ describe PageMeta do
     end
   end
 
+  describe ".attributes=" do
+    it "should ignore empty content if storage column is passed" do
+      meta = IntegerPageMeta.new
+      meta.attributes = { :integer_content => 1, :content => ''}
+      meta.content.should eql(1)
+    end
+  end
+
 end
