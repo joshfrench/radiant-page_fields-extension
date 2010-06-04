@@ -1,0 +1,2 @@
+class IntegerPageMeta < PageMeta
+end

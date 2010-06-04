@@ -1,0 +1,2 @@
+class DatetimePageMeta < PageMeta
+end

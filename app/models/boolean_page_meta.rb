@@ -1,0 +1,2 @@
+class BooleanPageMeta < PageMeta
+end
