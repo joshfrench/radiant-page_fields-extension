@@ -54,12 +54,13 @@ class PageMeta < ActiveRecord::Base
     end
   end
 
-  def attributes=(attributes)
-    attributes.stringify_keys!
+  def attributes=(new_attributes, guard_protected_attributes = true)
+    return if new_attributes.nil?
+    new_attributes.stringify_keys!
     # passing a blank content attr tends to override the expected behavior
     # for subclasses. in cases where the content column is *explicitly* set,
     # remove the content attr if it is blank.
-    attributes.delete('content') if attributes['content'].blank? && content_column && content_column != :content
+    new_attributes.delete('content') if new_attributes['content'].blank? && content_column && content_column != :content
     super
   end
 
