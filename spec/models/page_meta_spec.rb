@@ -17,4 +17,26 @@ describe PageMeta do
       meta.class.should be(PageMeta)
     end
   end
+
+  describe 'description' do
+    it "should calculate subclass description" do
+      class NamedPageMeta < PageMeta ; end
+      NamedPageMeta.description.should eql('Named')
+    end
+  end
+
+  describe ".content" do
+    it "should alias content attribute" do
+      meta = PageMeta.new(:content => "text", :integer_content => 123)
+      meta.content.should eql('text')
+      PageMeta.content = :integer
+      meta.content.should eql(123)
+    end
+
+    it "should set storage column" do
+      PageMeta.content = :integer
+      PageMeta.content_column.should eql('integer_content')
+    end
+  end
+
 end
