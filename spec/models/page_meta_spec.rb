@@ -1,12 +1,20 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe PageMeta do
-  before(:each) do
-    @page_meta = PageMeta.new
-  end
+  describe ".new" do
+    it "should cast instance to subclass if type is given" do
+      meta = PageMeta.new(:page_meta_type => 'BooleanPageMeta')
+      meta.class.should be(BooleanPageMeta)
+    end
 
-  it "should be valid" do
-    @page_meta.name = 'New Meta'
-    @page_meta.should be_valid
+    it "should use parent class if type is omitted" do
+      meta = PageMeta.new
+      meta.class.should be(PageMeta)
+    end
+
+    it "should use parent class if type is a mismatch" do
+      meta = PageMeta.new(:page_meta_type => 'Page')
+      meta.class.should be(PageMeta)
+    end
   end
 end
