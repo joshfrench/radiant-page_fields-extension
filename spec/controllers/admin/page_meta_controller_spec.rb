@@ -15,8 +15,13 @@ describe Admin::PageMetaController do
   end
 
   it "should render the page_meta partial" do
-    xhr :post, :create
+    xhr :post, :create, :page_meta => { :name => "Keywords" }
     response.should render_template('admin/page_meta/_page_meta')
+  end
+
+  it "should create a model of the given class" do
+    xhr :post, :create, :page_meta => {:name => 'True?', :page_meta_type => 'BooleanPageMeta'}
+    assigns(:page_meta).should be_kind_of(BooleanPageMeta)
   end
 
 end
