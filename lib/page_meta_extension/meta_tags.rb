@@ -28,7 +28,7 @@ module PageMetaExtension::MetaTags
           description
         end
       else
-        ActiveSupport::Deprecation.warn("Using r:meta without a `name' attribute is deprecated. Please use r:meta name='Meta Attribute' instead.",caller)
+        ActiveSupport::Deprecation.warn("Using r:meta without a `name' attribute is deprecated. Please use r:meta name='Meta Attribute' instead.", caller)
         tag.render('description', tag.attr) +
         tag.render('keywords', tag.attr)
       end
@@ -44,7 +44,7 @@ module PageMetaExtension::MetaTags
     <pre><code> <r:meta:description [tag="false"] /> </code></pre>
   }
   tag 'meta:description' do |tag|
-    ActiveSupport::Deprecation.warn('r:meta:description is deprecated. Please use r:meta name="Description" instead.',caller)
+    ActiveSupport::Deprecation.warn('r:meta:description is deprecated. Please use r:meta name="Description" instead.', caller)
     show_tag = tag.attr['tag'] != 'false' || false
     description = CGI.escapeHTML(tag.locals.page.meta['Description'])
     if show_tag
