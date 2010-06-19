@@ -47,4 +47,14 @@ describe PageMeta do
     end
   end
 
+  describe ".partial_name" do
+    specify "base class should be string_page_meta" do
+      PageMeta.partial_name.should eql('string_page_meta')
+    end
+
+    specify "subclass should be derived from class name" do
+      BooleanPageMeta.partial_name.should eql('boolean_page_meta')
+    end
+  end
+
 end

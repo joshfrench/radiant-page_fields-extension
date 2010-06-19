@@ -52,6 +52,10 @@ class PageMeta < ActiveRecord::Base
     def scoped_methods
       Thread.current[:"#{self}_scoped_methods"] ||= (self.default_scoping || []).dup
     end
+
+    def partial_name
+      name == 'PageMeta' ? 'string_page_meta' : name.underscore
+    end
   end
 
   def attributes=(new_attributes, guard_protected_attributes = true)
@@ -62,6 +66,10 @@ class PageMeta < ActiveRecord::Base
     # remove the content attr if it is blank.
     new_attributes.delete('content') if new_attributes['content'].blank? && content_column && content_column != :content
     super
+  end
+
+  def partial_name
+    self.class.partial_name
   end
 
 end
