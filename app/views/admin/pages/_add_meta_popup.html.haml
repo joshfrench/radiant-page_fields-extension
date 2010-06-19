@@ -6,6 +6,8 @@
     %p
       %label{:for=>"page_meta_name"}= t('name')
       = f.text_field :name, :maxlength=>100, :class=>'textbox big', :style=>"width: 15em"
+      %label{:for=>'page_meta_type'}=t('type')
+      = f.select :page_meta_type, [PageMeta, *PageMeta.descendants.sort_by(&:name)].map{|m| [m.description, m.name]}
       = hidden_field_tag 'index', 2, :id=>'page_meta_index_field'
       = hidden_field_tag 'page_meta_counter', @page.meta.size
     %p.buttons

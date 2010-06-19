@@ -56,6 +56,28 @@ class PageMeta < ActiveRecord::Base
     def partial_name
       name == 'PageMeta' ? 'string_page_meta' : name.underscore
     end
+
+    def descendants
+      load_descendants
+      super
+    end
+
+    private
+
+      def load_descendants
+        unless @_descendants_loaded
+          paths = [Rails, *Radiant::Extension.descendants].map do |ext|
+            ext.root.to_s + '/app/models'
+          end
+          paths.each do |path|
+            Dir["#{path}/*_page_meta.rb"].each do |page_part|
+              $1.camelize.constantize if page_part =~ %r{/([^/]+)\.rb}
+            end
+          end
+          @_descendants_loaded = true
+        end
+      end
+
   end
 
   def attributes=(new_attributes, guard_protected_attributes = true)
