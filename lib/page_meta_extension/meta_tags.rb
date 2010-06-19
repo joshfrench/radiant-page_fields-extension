@@ -63,7 +63,7 @@ module PageMetaExtension::MetaTags
     <pre><code> <r:meta:keywords [tag="false"] /> </code></pre>
   }
   tag 'meta:keywords' do |tag|
-    ActiveSupport::Deprecation.warn('r:meta:keywords is deprecated. Please use r:meta name="Keywords" instead.',caller)
+    ActiveSupport::Deprecation.warn('r:meta:keywords is deprecated. Please use r:meta name="Keywords" instead.', caller)
     show_tag = tag.attr['tag'] != 'false' || false
     keywords = CGI.escapeHTML(tag.locals.page.meta['Keywords'])
     if show_tag
@@ -71,5 +71,18 @@ module PageMetaExtension::MetaTags
     else
       keywords
     end
+  end
+
+  tag 'meta:datetime' do |tag|
+  end
+
+  def meta_tag_for(meta)
+    klass = meta.class
+    while klass != meta.class.base_class
+      tag = klass.name.to_name('Page Meta').downcase
+      return "meta:#{tag}" if respond_to?("tag:meta:#{tag}")
+      klass = klass.superclass
+    end
+    return 'meta'
   end
 end

@@ -1,6 +1,7 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe PageMetaExtension::MetaTags do
+
   before do
     @page = Page.new(:slug => "/", :parent_id => nil, :title => 'Home')
     @keywords = PageMeta.new(:name => 'Keywords', :content => "Home, Page")
@@ -90,4 +91,19 @@ describe PageMetaExtension::MetaTags do
       end
     end
   end
+
+  describe "#meta_tag_for" do
+    it "should return base class" do
+      @page.meta_tag_for(PageMeta.new).should eql('meta')
+    end
+
+    it "should return a defined subclass" do
+      @page.meta_tag_for(DatetimePageMeta.new).should eql('meta:datetime')
+    end
+
+    it "should default to base if no subclass tag is defined" do
+      @page.meta_tag_for(IntegerPageMeta.new).should eql('meta')
+    end
+  end
+
 end
