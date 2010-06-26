@@ -93,8 +93,8 @@ describe PageMetaExtension::MetaTags do
   end
 
   describe "#meta_tag_for" do
-    it "should return base class" do
-      @page.meta_tag_for(PageMeta.new).should eql('meta')
+    it "should return standard tag" do
+      @page.meta_tag_for(PageMeta.new).should eql('meta:string')
     end
 
     it "should return a defined subclass" do
@@ -102,7 +102,7 @@ describe PageMetaExtension::MetaTags do
     end
 
     it "should default to base if no subclass tag is defined" do
-      @page.meta_tag_for(IntegerPageMeta.new).should eql('meta')
+      @page.meta_tag_for(IntegerPageMeta.new).should eql('meta:string')
     end
   end
 

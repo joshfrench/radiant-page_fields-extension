@@ -35,6 +35,19 @@ module PageMetaExtension::MetaTags
     end
   end
 
+  tag 'meta:datetime' do |tag|
+  end
+
+  def meta_tag_for(meta)
+    klass = meta.class
+    while klass != meta.class.base_class
+      tag = klass.name.to_name('Page Meta').downcase
+      return "meta:#{tag}" if respond_to?("tag:meta:#{tag}")
+      klass = klass.superclass
+    end
+    return 'meta:string'
+  end
+
   desc %{
     Emits the page description field in a meta tag, unless attribute
     'tag' is set to 'false'.
@@ -73,16 +86,4 @@ module PageMetaExtension::MetaTags
     end
   end
 
-  tag 'meta:datetime' do |tag|
-  end
-
-  def meta_tag_for(meta)
-    klass = meta.class
-    while klass != meta.class.base_class
-      tag = klass.name.to_name('Page Meta').downcase
-      return "meta:#{tag}" if respond_to?("tag:meta:#{tag}")
-      klass = klass.superclass
-    end
-    return 'meta'
-  end
 end
