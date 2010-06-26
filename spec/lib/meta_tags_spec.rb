@@ -107,6 +107,11 @@ describe PageMetaExtension::MetaTags do
   end
 
   describe "Meta tag delegation" do
+    it "should render an Integer meta as a string" do
+      @page.meta = [IntegerPageMeta.new(:name => 'int', :content => 100)]
+      @page.should render('<r:meta name="int" tag="false" />').as('100')
+    end
+
     describe "r:meta:datetime" do
       before do
         @time = Time.now
