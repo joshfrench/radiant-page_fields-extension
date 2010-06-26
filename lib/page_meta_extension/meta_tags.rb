@@ -35,6 +35,10 @@ module PageMetaExtension::MetaTags
     end
   end
 
+  tag 'meta:string' do |tag|
+    tag.locals.page.meta[tag.attr['name']].try :content
+  end
+
   tag 'meta:datetime' do |tag|
   end
 
@@ -59,7 +63,7 @@ module PageMetaExtension::MetaTags
   tag 'meta:description' do |tag|
     ActiveSupport::Deprecation.warn('r:meta:description is deprecated. Please use r:meta name="Description" instead.', caller)
     show_tag = tag.attr['tag'] != 'false' || false
-    description = CGI.escapeHTML(tag.locals.page.meta['Description'])
+    description = CGI.escapeHTML(tag.locals.page.meta['Description'].try :content)
     if show_tag
       "<meta name=\"description\" content=\"#{description}\" />"
     else
@@ -78,7 +82,7 @@ module PageMetaExtension::MetaTags
   tag 'meta:keywords' do |tag|
     ActiveSupport::Deprecation.warn('r:meta:keywords is deprecated. Please use r:meta name="Keywords" instead.', caller)
     show_tag = tag.attr['tag'] != 'false' || false
-    keywords = CGI.escapeHTML(tag.locals.page.meta['Keywords'])
+    keywords = CGI.escapeHTML(tag.locals.page.meta['Keywords'].try :content)
     if show_tag
       "<meta name=\"keywords\" content=\"#{keywords}\" />"
     else
