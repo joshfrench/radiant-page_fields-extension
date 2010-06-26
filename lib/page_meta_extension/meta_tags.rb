@@ -20,10 +20,9 @@ module PageMetaExtension::MetaTags
     else
       if !tag.attr['name'].blank?
         name = tag.attr['name']
-        meta = tag.locals.page.meta[name]
-        return '' if meta.blank?
+        return '' unless tag.locals.meta = tag.locals.page.meta[name]
         show_tag = tag.attr['tag'] != 'false' || false
-        description = CGI.escapeHTML(tag.render(meta_tag_for(meta), tag.attr))
+        description = CGI.escapeHTML(tag.render(meta_tag_for(tag.locals.meta), tag.attr))
         if show_tag
           %{<meta name="#{name.downcase}" content="#{description}" />}
         else
@@ -38,7 +37,7 @@ module PageMetaExtension::MetaTags
   end
 
   tag 'meta:string' do |tag|
-    tag.locals.page.meta[tag.attr['name']].try :content
+    tag.locals.meta.content
   end
 
   tag 'meta:datetime' do |tag|
