@@ -112,6 +112,13 @@ describe PageMetaExtension::MetaTags do
       @page.should render('<r:meta name="int" tag="false" />').as('100')
     end
 
+    describe "r:meta:boolean" do
+      it "should render 'true'" do
+        @page.meta = [BooleanPageMeta.new(:name => 'bool', :content => true)]
+        @page.should render('<r:meta name="bool" tag="false" />').as('true')
+      end
+    end
+
     describe "r:meta:datetime" do
       before do
         @time = Time.now
