@@ -41,6 +41,8 @@ module PageMetaExtension::MetaTags
   end
 
   tag 'meta:datetime' do |tag|
+    format = (tag.attr['format'] || '%A, %B %d, %Y')
+    tag.locals.meta.content.strftime(format)
   end
 
   def meta_tag_for(meta)

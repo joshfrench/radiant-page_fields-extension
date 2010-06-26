@@ -106,4 +106,21 @@ describe PageMetaExtension::MetaTags do
     end
   end
 
+  describe "Meta tag delegation" do
+    describe "r:meta:datetime" do
+      before do
+        @time = Time.now
+        @page.meta = [DatetimePageMeta.new(:name => 'expires-on', :content => @time)]
+      end
+
+      it "should render the meta content" do
+        @page.should render('<r:meta name="expires-on" />').matching(%r[#{@time.strftime("%A, %B %d, %Y")}])
+      end
+
+      it "should take a format attr" do
+        @page.should render('<r:meta name="expires-on" format="%X" />').matching(%r[#{@time.strftime("%X")}])
+      end
+    end
+  end
+
 end
