@@ -15,11 +15,11 @@ describe Page do
     end
 
     it "should find meta by name" do
-      @page.meta['Meta'].should eql('sweet harmonious biscuit')
+      @page.meta['Meta'].content.should eql('sweet harmonious biscuit')
     end
 
     it "should be case insensitive" do
-      @page.meta['meta'].should eql('sweet harmonious biscuit')
+      @page.meta['meta'].content.should eql('sweet harmonious biscuit')
     end
 
     it "should return nil if meta not found" do

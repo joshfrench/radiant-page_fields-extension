@@ -3,7 +3,7 @@ module PageMetaExtension::PageExtensions
     base.instance_eval do
       has_many :meta, :class_name => 'PageMeta', :order => :id, :dependent => :destroy do
         def [](name)
-          detect { |m| m.name.downcase == name.downcase }.try :content
+          detect { |m| m.name.downcase == name.downcase }
         end
       end
       accepts_nested_attributes_for :meta, :allow_destroy => true
