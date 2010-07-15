@@ -135,4 +135,33 @@ describe PageMetaExtension::MetaTags do
     end
   end
 
+  context "Boolean tags r:meta" do
+    before do
+      @bool = BooleanPageMeta.new(:name => 'bool', :content => true)
+      @page.meta = [@bool]
+    end
+
+    describe ":if" do
+      it "should expand if true" do
+        @page.should render('<r:meta:if name="bool">T</r:meta:if>').as('T')
+      end
+
+      it "should not expand if false" do
+        @bool.content = false
+        @page.should render('<r:meta:if name="bool">F</r:meta:if>').as('')
+      end
+    end
+
+    describe ":unless" do
+      it "should not expand if true" do
+        @page.should render('<r:meta:unless name="bool">T</r:meta:unless>').as('')
+      end
+
+      it "should expand if false" do
+        @bool.content = false
+        @page.should render('<r:meta:unless name="bool">F</r:meta:unless>').as('F')
+      end
+    end
+  end
+
 end

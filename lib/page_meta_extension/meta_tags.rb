@@ -19,12 +19,11 @@ module PageMetaExtension::MetaTags
       tag.expand
     else
       if !tag.attr['name'].blank?
-        name = tag.attr['name']
-        return '' unless tag.locals.meta = tag.locals.page.meta[name]
+        return '' unless name = assign_local_meta!(tag)
         show_tag = tag.attr['tag'] != 'false' || false
         description = CGI.escapeHTML(tag.render(meta_tag_for(tag.locals.meta), tag.attr))
         if show_tag
-          %{<meta name="#{name.downcase}" content="#{description}" />}
+          %{<meta name="#{name}" content="#{description}" />}
         else
           description
         end
@@ -45,6 +44,16 @@ module PageMetaExtension::MetaTags
     tag.locals.meta.content.strftime(format)
   end
 
+  tag 'meta:if' do |tag|
+    assign_local_meta!(tag)
+    tag.expand if tag.locals.meta.content === true
+  end
+
+  tag 'meta:unless' do |tag|
+    assign_local_meta!(tag)
+    tag.expand unless tag.locals.meta.content === true
+  end
+
   def meta_tag_for(meta)
     klass = meta.class
     while klass != meta.class.base_class
@@ -53,6 +62,12 @@ module PageMetaExtension::MetaTags
       klass = klass.superclass
     end
     return 'meta:string'
+  end
+
+  def assign_local_meta!(tag)
+    return if tag.attr['name'].blank?
+    tag.locals.meta = tag.locals.page.meta[tag.attr['name']]
+    tag.attr['name'].downcase
   end
 
   desc %{
