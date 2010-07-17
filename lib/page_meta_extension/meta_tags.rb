@@ -35,35 +35,6 @@ module PageMetaExtension::MetaTags
     end
   end
 
-  tag 'meta:string' do |tag|
-    tag.locals.meta.content
-  end
-
-  tag 'meta:datetime' do |tag|
-    format = (tag.attr['format'] || '%A, %B %d, %Y')
-    tag.locals.meta.content.strftime(format)
-  end
-
-  tag 'meta:if' do |tag|
-    assign_local_meta!(tag)
-    tag.expand if tag.locals.meta.content === true
-  end
-
-  tag 'meta:unless' do |tag|
-    assign_local_meta!(tag)
-    tag.expand unless tag.locals.meta.content === true
-  end
-
-  def meta_tag_for(meta)
-    klass = meta.class
-    while klass != meta.class.base_class
-      tag = klass.name.to_name('Page Meta').downcase
-      return "meta:#{tag}" if respond_to?("tag:meta:#{tag}")
-      klass = klass.superclass
-    end
-    return 'meta:string'
-  end
-
   def assign_local_meta!(tag)
     return if tag.attr['name'].blank?
     tag.locals.meta = tag.locals.page.meta[tag.attr['name']]
