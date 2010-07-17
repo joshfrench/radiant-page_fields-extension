@@ -27,7 +27,9 @@ function attributeAdded(element) {
   $(element).previous('.busy').hide();
   $(element).down('.button').enable();
   $(element).up('.popup').closePopup();
-  $('page_meta_counter').setValue(Number($('page_meta_counter').value).succ());
+  var meta_index = $('page_meta_counter').value;
+  $('page_meta_attributes_' + meta_index + '_content').focus();
+  $('page_meta_counter').setValue(Number(meta_index).succ());
   $('new_page_meta').reset();
 }
 function attributeLoading(element) {
