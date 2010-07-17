@@ -2,9 +2,9 @@
 # require_dependency 'application_controller'
 
 class PageMetaExtension < Radiant::Extension
-  version "1.0"
-  description "Describe your extension here"
-  url "http://github.com/jfrench/radiant-page_meta-extension"
+  version "0.1"
+  description "Adds editable page attributes."
+  url "http://github.com/joshfrench/radiant-page_meta-extension"
 
   extension_config do |config|
     config.after_initialize do

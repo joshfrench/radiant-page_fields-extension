@@ -3,9 +3,9 @@ begin
   Jeweler::Tasks.new do |gem|
     gem.name = "radiant-page_meta-extension"
     gem.summary = %Q{Page Meta Extension for Radiant CMS}
-    gem.description = %Q{Describe your extension here}
+    gem.description = %Q{Adds editable page attributes to Radiant CMS.}
     gem.email = "josh@digitalpulp.com"
-    gem.homepage = "http://github.com/jfrench/radiant-page_meta-extension"
+    gem.homepage = "http://github.com/joshfrench/radiant-page_meta-extension"
     gem.authors = ["Josh French"]
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
