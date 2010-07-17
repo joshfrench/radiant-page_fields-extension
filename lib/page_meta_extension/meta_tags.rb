@@ -21,7 +21,7 @@ module PageMetaExtension::MetaTags
       if !tag.attr['name'].blank?
         return '' unless name = assign_local_meta!(tag)
         show_tag = tag.attr['tag'] != 'false' || false
-        description = CGI.escapeHTML(tag.render(meta_tag_for(tag.locals.meta), tag.attr))
+        description = CGI.escapeHTML(tag.locals.meta.content)
         if show_tag
           %{<meta name="#{name}" content="#{description}" />}
         else
