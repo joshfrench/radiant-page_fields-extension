@@ -22,3 +22,9 @@ For backwards compatibility, `r:meta`, `r:meta:description`, and
     <r:meta name="description />"
 
 The old tag syntax without a `name` attribute may be deprecated at some point.
+
+## Todo
+
+Merge in multitype support (datetime, boolean, integer attributes) and
+conditional tags. Document the hooks you'd want to use if you were to create
+your own extended attribute type.
