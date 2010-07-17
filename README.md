@@ -6,6 +6,9 @@ and delete attributes much like page parts.
 
 ## Usage
 
+Currently, PageMeta only works on edge (Radiant > 0.9.1) due to some changes
+made to the core javascripts.
+
 When you install PageMeta and run the migrations, the __keyword__ and
 __description__ fields will be converted to page attributes. If you would like
 your pages to be born with a different set of default attributes, you may
