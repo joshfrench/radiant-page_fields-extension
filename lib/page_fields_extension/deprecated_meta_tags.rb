@@ -1,4 +1,4 @@
-module PageFieldsExtension::PageFieldTags
+module PageFieldsExtension::DeprecatedMetaTags
   include Radiant::Taggable
 
   desc %{
@@ -15,30 +15,13 @@ module PageFieldsExtension::PageFieldTags
     </code></pre>
   }
   tag 'meta' do |tag|
+    ActiveSupport::Deprecation.warn("r:meta is deprecated. Please use r:field name='field_name' instead.", caller)
     if tag.double?
       tag.expand
     else
-      if !tag.attr['name'].blank?
-        return '' unless name = assign_local_meta!(tag)
-        show_tag = tag.attr['tag'] != 'false' || false
-        description = CGI.escapeHTML(tag.locals.meta.content)
-        if show_tag
-          %{<meta name="#{name}" content="#{description}" />}
-        else
-          description
-        end
-      else
-        ActiveSupport::Deprecation.warn("Using r:meta without a `name' attribute is deprecated. Please use r:meta name='Meta Attribute' instead.", caller)
-        tag.render('description', tag.attr) +
-        tag.render('keywords', tag.attr)
-      end
+      tag.render('description', tag.attr) +
+      tag.render('keywords', tag.attr)
     end
-  end
-
-  def assign_local_meta!(tag)
-    return if tag.attr['name'].blank?
-    tag.locals.meta = tag.locals.page.meta[tag.attr['name']]
-    tag.attr['name'].downcase
   end
 
   desc %{
@@ -50,9 +33,9 @@ module PageFieldsExtension::PageFieldTags
     <pre><code> <r:meta:description [tag="false"] /> </code></pre>
   }
   tag 'meta:description' do |tag|
-    ActiveSupport::Deprecation.warn('r:meta:description is deprecated. Please use r:meta name="Description" instead.', caller)
+    ActiveSupport::Deprecation.warn('r:meta:description is deprecated. Please use r:field name="Description" instead.', caller)
     show_tag = tag.attr['tag'] != 'false' || false
-    description = CGI.escapeHTML(tag.locals.page.meta['Description'].try :content)
+    description = CGI.escapeHTML(tag.locals.page.fields['Description'].try :content)
     if show_tag
       "<meta name=\"description\" content=\"#{description}\" />"
     else
@@ -69,9 +52,9 @@ module PageFieldsExtension::PageFieldTags
     <pre><code> <r:meta:keywords [tag="false"] /> </code></pre>
   }
   tag 'meta:keywords' do |tag|
-    ActiveSupport::Deprecation.warn('r:meta:keywords is deprecated. Please use r:meta name="Keywords" instead.', caller)
+    ActiveSupport::Deprecation.warn('r:meta:keywords is deprecated. Please use r:field name="Keywords" instead.', caller)
     show_tag = tag.attr['tag'] != 'false' || false
-    keywords = CGI.escapeHTML(tag.locals.page.meta['Keywords'].try :content)
+    keywords = CGI.escapeHTML(tag.locals.page.fields['Keywords'].try :content)
     if show_tag
       "<meta name=\"keywords\" content=\"#{keywords}\" />"
     else

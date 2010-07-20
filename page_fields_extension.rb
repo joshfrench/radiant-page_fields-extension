@@ -6,7 +6,7 @@ class PageFieldsExtension < Radiant::Extension
   url "http://github.com/joshfrench/radiant-page_fields-extension"
   
   def activate
-    Page.send :include, PageExtensions, PageFieldTags
+    Page.send :include, PageExtensions, DeprecatedMetaTags
     Admin::PagesController.send :include, PagesControllerExtensions
     admin.pages.edit.add :popups, 'add_field_popup'
     admin.page.edit.add :extended_metadata, "page_fields"
