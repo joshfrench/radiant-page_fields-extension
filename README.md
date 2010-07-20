@@ -1,20 +1,19 @@
-# Page Meta
+# Page Fields
 
-PageMeta adds editable attributes to your pages. These attributes can be found
-in the "More" drawer, along with the slug and breadcrumb. You can add, edit,
-and delete attributes much like page parts.
+Adds editable fields to your pages. These fields can be found in the "More"
+drawer, along with the slug and breadcrumb. You can add, edit, and delete fields much like page parts.
 
 ## Usage
 
-Currently, PageMeta only works on edge (Radiant > 0.9.1) due to some changes
+Currently, PageFields only works on edge (Radiant > 0.9.1) due to some changes
 made to the core javascripts.
 
-When you install PageMeta and run the migrations, the __keyword__ and
-__description__ fields will be converted to page attributes. If you would like
-your pages to be born with a different set of default attributes, you may
-change `Radiant::Config['defaults.page.meta']`:
+When you install PageFields and run the migrations, all page __keyword__ and
+__description__ attributes will be converted to page fields. If you would like
+your pages to be born with a different set of default fields, you may
+change `Radiant::Config['defaults.page.fields']`:
 
-    Radiant::Config['defaults.page.meta'] = 'keywords, description, author'
+    Radiant::Config['defaults.page.fields'] = 'keywords, description, author'
 
 ## Meta tags
 
@@ -28,6 +27,6 @@ The old tag syntax without a `name` attribute may be deprecated at some point.
 
 ## Todo
 
-Merge in multitype support (datetime, boolean, integer attributes) and
+Merge in multitype support (datetime, boolean, integer fields) and
 conditional tags. Document the hooks you'd want to use if you were to create
-your own extended attribute type.
+your own extended field type.

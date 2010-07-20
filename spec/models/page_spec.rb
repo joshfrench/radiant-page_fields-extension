@@ -1,29 +1,29 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe Page do
-  it "should allow initialization with default meta" do
-    @page = Page.new_with_defaults({ 'defaults.page.meta' => 'x, y, z' })
-    @page.meta.size.should == 3
-    @page.meta.first.name.should == 'x'
-    @page.meta.last.name.should == 'z'
+  it "should allow initialization with default fields" do
+    @page = Page.new_with_defaults({ 'defaults.page.fields' => 'x, y, z' })
+    @page.fields.size.should == 3
+    @page.fields.first.name.should == 'x'
+    @page.fields.last.name.should == 'z'
   end
 
-  describe "#meta[]" do
+  describe "#fields[]" do
     before do
       @page = Page.new
-      @page.meta << PageMeta.new(:name => 'Meta', :content => 'sweet harmonious biscuit')
+      @page.fields << PageField.new(:name => 'Field', :content => 'sweet harmonious biscuit')
     end
 
-    it "should find meta by name" do
-      @page.meta['Meta'].content.should eql('sweet harmonious biscuit')
+    it "should find field by name" do
+      @page.fields['Field'].content.should eql('sweet harmonious biscuit')
     end
 
     it "should be case insensitive" do
-      @page.meta['meta'].content.should eql('sweet harmonious biscuit')
+      @page.fields['Field'].content.should eql('sweet harmonious biscuit')
     end
 
     it "should return nil if meta not found" do
-      @page.meta['Bogus'].should be_nil
+      @page.fields['Bogus'].should be_nil
     end
   end
 end

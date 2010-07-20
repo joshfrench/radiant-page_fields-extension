@@ -1,4 +1,4 @@
-module PageMetaExtension::MetaTags
+module PageFieldsExtension::PageFieldTags
   include Radiant::Taggable
 
   desc %{

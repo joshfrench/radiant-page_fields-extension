@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
-describe PageMetaExtension::MetaTags do
+describe PageFieldsExtension::PageFieldTags do
 
   before do
     @page = Page.new(:slug => "/", :parent_id => nil, :title => 'Home')

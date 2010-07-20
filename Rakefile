@@ -1,16 +1,16 @@
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
-    gem.name = "radiant-page_meta-extension"
-    gem.summary = %Q{Page Meta Extension for Radiant CMS}
-    gem.description = %Q{Adds editable page attributes to Radiant CMS.}
+    gem.name = "radiant-page_fields-extension"
+    gem.summary = %Q{Page Fields Extension for Radiant CMS}
+    gem.description = %Q{Adds editable page fields to Radiant CMS.}
     gem.email = "josh@digitalpulp.com"
-    gem.homepage = "http://github.com/joshfrench/radiant-page_meta-extension"
+    gem.homepage = "http://github.com/joshfrench/radiant-page_fields-extension"
     gem.authors = ["Josh French"]
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
 rescue LoadError
-  puts "Jeweler (or a dependency) not available. This is only required if you plan to package page_meta as a gem."
+  puts "Jeweler (or a dependency) not available. This is only required if you plan to package page_fields as a gem."
 end
 
 # In rails 1.2, plugins aren't available in the path until they're loaded.
@@ -115,17 +115,17 @@ namespace :spec do
   end
 end
 
-desc 'Generate documentation for the page_meta extension.'
+desc 'Generate documentation for the page_fields extension.'
 Rake::RDocTask.new(:rdoc) do |rdoc|
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title    = 'PageMetaExtension'
+  rdoc.title    = 'PageFieldsExtension'
   rdoc.options << '--line-numbers' << '--inline-source'
   rdoc.rdoc_files.include('README')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
 
 # For extensions that are in transition
-desc 'Test the page_meta extension.'
+desc 'Test the page_fields extension.'
 Rake::TestTask.new(:test) do |t|
   t.libs << 'lib'
   t.pattern = 'test/**/*_test.rb'

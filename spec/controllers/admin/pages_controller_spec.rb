@@ -6,7 +6,6 @@ describe Admin::PagesController do
     it "should not contain keywords or description" do
       login_as :admin
       get :new
-      puts assigns(:meta).inspect
       assigns(:meta).select{ |m| %w(keywords description).include?(m[:field]) }.should be_empty
     end
   end
