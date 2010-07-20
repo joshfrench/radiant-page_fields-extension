@@ -45,4 +45,36 @@ describe PageFieldsExtension::PageFieldTags do
     end
   end
 
+  describe "<r:unless_field>" do
+    describe "with `name` attr" do
+      it "should should expand unless field exists" do
+        @page.should render('<r:unless_field name="field">Ok</r:unless_field>').as('')
+      end
+
+      it "should not expand if field exists" do
+        @page.should render('<r:unless_field name="bogus">Ok</r:unless_field>').as('Ok')
+      end
+    end
+
+    describe "with `equals` attr" do
+      it "should expand unless content equals attr" do
+        @page.should render('<r:unless_field name="field" equals="sweet harmonious biscuits">Ok</r:unless_field>').as('')
+      end
+
+      it "should be case sensitive if ignore_case is false" do
+        @page.should render('<r:unless_field name="field" equals="sweet harmonious biscuits" ignore_case="false">Ok</r:unless_field>').as('Ok')
+      end
+    end
+
+    describe "with `matches` attr" do
+      it "should expand unless content matches attr" do
+        @page.should render('<r:unless_field name="field" matches="^sweet\s">Ok</r:unless_field>').as('')
+      end
+
+      it "should be case sensitive if ignore_case is false" do
+        @page.should render('<r:unless_field name="field" matches="^sweet\s" ignore_case="false">Ok</r:unless_field>').as('Ok')
+      end
+    end
+  end
+
 end
