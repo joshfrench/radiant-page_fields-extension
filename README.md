@@ -8,12 +8,19 @@ drawer, along with the slug and breadcrumb. You can add, edit, and delete fields
 Currently, PageFields only works on edge (Radiant > 0.9.1) due to some changes
 made to the core javascripts.
 
-When you install PageFields and run the migrations, all page __keyword__ and
-__description__ attributes will be converted to page fields. If you would like
+When you install PageFields run these in your shell
+
+    rake radiant:extensions:page_fields:migrate
+    rake radiant:extensions:page_fields:update
+
+All page __keyword__ and __description__ attributes will be converted to page fields. If you would like
 your pages to be born with a different set of default fields, you may
 change `Radiant::Config['defaults.page.fields']`:
 
     Radiant::Config['defaults.page.fields'] = 'keywords, description, author'
+
+To output data to your pages use:
+    <r:field name="field_name" />
 
 ## Meta tags
 
