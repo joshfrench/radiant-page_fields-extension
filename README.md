@@ -1,20 +1,17 @@
 # Page Fields
 
 Adds editable fields to your pages. These fields can be found in the "More"
-drawer, along with the slug and breadcrumb. You can add, edit, and delete fields much like page parts.
+drawer, along with the slug and breadcrumb. You can add, edit, and delete fields
+much like page parts.
 
 ## Usage
 
-Currently, PageFields only works on edge (Radiant > 0.9.1) due to some changes
-made to the core javascripts.
+PageFields is now a part of Radiant core. It was merged in some time after
+0.9.1, and is not compatible with Radiant 0.9.1 or earlier. This means you
+probably don't need to install PageFields unless you are running a specific
+checkout of Radiant in a narrow range between 0.9.1 and the current edge.
 
-When you install PageFields run these in your shell
-
-    rake radiant:extensions:page_fields:migrate
-    rake radiant:extensions:page_fields:update
-
-All page __keyword__ and __description__ attributes will be converted to page fields. If you would like
-your pages to be born with a different set of default fields, you may
+If you want your pages to be born with a different set of default fields, you may
 change `Radiant::Config['defaults.page.fields']`:
 
     Radiant::Config['defaults.page.fields'] = 'keywords, description, author'
